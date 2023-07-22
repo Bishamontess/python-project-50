@@ -9,4 +9,3 @@ def gendiff_help():
     parser.add_argument("--format", metavar="FORMAT", help="set format of output")
     args = parser.parse_args()
     print(args.first_file, args.second_file, args.format)
-

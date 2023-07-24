@@ -4,8 +4,9 @@ import json
 def generate_diff(path_to_json1, path_to_json2):
     dict1 = json.load(open(path_to_json1))
     dict2 = json.load(open(path_to_json2))
-    list_all_keys = list(dict1.keys()) + list(dict2.keys())
-    all_keys = set(list_all_keys)
+    all_keys = list(set(list(dict1.keys()) + list(dict2.keys())))
+    all_keys.sort()
+
     result = ''
     for key in all_keys:
         if key in dict1 and key in dict2:

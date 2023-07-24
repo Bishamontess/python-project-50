@@ -8,6 +8,10 @@ package-install:
 lint:
 	poetry run flake8 gendiff
 test:
+	poetry run pytest
 test-coverage:
+	poetry run pytest --cov
+check: 
+	selfcheck test lint
 
 .PHONY: install test lint selfcheck check build publish

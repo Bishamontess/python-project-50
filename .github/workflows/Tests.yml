@@ -26,16 +26,16 @@ jobs:
 
     - name: Install
       run:
-        build
-        package-install
+        make build
+        make package-install
 
     - name: Install dependencies
       run: make
 
     - name: Run check
       run: 
-       lint
+       make lint
 
     - name: Run tests
       run:
-       test
+       make test

@@ -22,5 +22,5 @@ def generate_diff(path_to_json1, path_to_json2):
         if key not in dict2:
             string = f"- {key}: {dict1[key]}\n"
             result += string
-    string_diff = "{" + "\n" + result + "}"
+    string_diff = "{" + "\n" + result + "}" + "\n"
     return string_diff

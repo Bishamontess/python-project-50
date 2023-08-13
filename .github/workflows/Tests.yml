@@ -27,7 +27,7 @@ jobs:
     - name: Install
       run:
         make build
-        python3 -m pip install --user dist/*.whl
+        python3 -m pip install dist/*.whl
 
     - name: Install dependencies
       run: make

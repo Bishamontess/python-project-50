@@ -14,10 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: configure
+      run: ./configure
+
     - name: Install dependencies
-      run: 
+      run:
         pip install poetry
-        poetry build
         make build
         make package-install
 

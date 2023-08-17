@@ -1,14 +1,15 @@
 gendiff:
 	poetry run python -m gendiff.scripts.gendiff -h
-build:
+	
+install:
 	poetry build
-package-install:
 	python3 -m pip install --force-reinstall --user dist/*.whl
 	
-lint:
+	
+check:
 	poetry run flake8 gendiff
-test:
 	poetry run pytest
+
 test-coverage:
 	poetry run pytest --cov
 

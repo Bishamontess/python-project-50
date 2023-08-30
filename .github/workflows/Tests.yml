@@ -13,9 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: configure
-      run: ./pyproject.toml
+#
+#    - name: configure
+#      run: ./pyproject.toml
 
     - name: Install dependencies
       run: |

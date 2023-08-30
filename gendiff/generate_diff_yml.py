@@ -1,5 +1,5 @@
+from gendiff.parser_yml import parser_yml
 import json
-from gendiff.parser_json import parser_json
 
 
 def make_diff_string(result_json):
@@ -17,8 +17,8 @@ def make_diff_string(result_json):
     return jsons_diff_result
 
 
-def generate_diff(path_to_json1, path_to_json2):
-    dict1, dict2 = parser_json(path_to_json1, path_to_json2)
+def generate_diff_yml(path_to_json1, path_to_json2):
+    dict1, dict2 = parser_yml(path_to_json1, path_to_json2)
     all_keys = list(set(list(dict1.keys()) + list(dict2.keys())))
     all_keys.sort()
 

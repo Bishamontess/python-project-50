@@ -1,5 +1,7 @@
 import json
-from gendiff.parser_json import parser_json
+
+
+from gendiff.parsers import get_data
 
 
 def make_diff_string(result_json):
@@ -17,8 +19,10 @@ def make_diff_string(result_json):
     return jsons_diff_result
 
 
-def generate_diff(path_to_json1, path_to_json2):
-    dict1, dict2 = parser_json(path_to_json1, path_to_json2)
+def generate_diff(dict1, dict2):
+    dict1 = get_data(dict1)
+    dict2 = get_data(dict2)
+
     all_keys = list(set(list(dict1.keys()) + list(dict2.keys())))
     all_keys.sort()
 

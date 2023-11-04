@@ -21,7 +21,3 @@ def parse_data(data, data_format):
 
 def data_and_format(source, data=get_file, data_format=get_extension):
     return data(source), data_format(get_extension(source))
-
-
-print(parse_data(open('/home/bishamon/python-project-50/tests/fixtures/plain'
-                      '/file1.yaml'), 'json'))

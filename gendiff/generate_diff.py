@@ -1,6 +1,6 @@
 from gendiff.differ import get_diff
 from gendiff.parsers import parse_data
-from gendiff.formatter import format_output
+from gendiff.formatter.formatter import format_output
 from gendiff.parsers import data_and_format
 
 DEFAULT_FORMAT = 'stylish'

@@ -9,53 +9,6 @@ OLD_VALUE = 'old_value'
 NEW_VALUE = 'new_value'
 
 
-
-# def generate_diff(dict1, dict2):
-#     dict1 = parse_data(dict1)
-#     dict2 = parse_data(dict2)
-#
-#     all_keys = list(set(list(dict1.keys()) + list(dict2.keys())))
-#     all_keys.sort()
-#
-#     result = {}
-#     for key in all_keys:
-#         if key in dict1 and key in dict2:
-#             if dict1.get(key) == dict2.get(key):
-#                 special_key = f'  ^ {key}'
-#                 result[special_key] = dict1[key]
-#             else:
-#                 key_1 = f'  - {key}'
-#                 key_2 = f'  + {key}'
-#                 result[key_1] = dict1[key]
-#                 result[key_2] = dict2[key]
-#         if key not in dict1:
-#             new_key = f'  + {key}'
-#             result[new_key] = dict2[key]
-#         if key not in dict2:
-#             new_key = f'  - {key}'
-#             result[new_key] = dict1[key]
-#     result_json = json.dumps(result)
-#     jsons_diff = make_diff_string(result_json)
-#     return jsons_diff
-
-# def stringify(tree, replacer=" ", spaces_count=1):
-#     replacer = replacer * spaces_count
-#
-#     def walk(node, count):
-#         if not isinstance(node, dict):
-#             return f'{node}'
-#
-#         lines = []
-#
-#         for key, value in node.items():
-#             val = walk(value, count + 1)
-#             line = f'{replacer * (count + 1)}{key}: {val}'
-#             lines.append(line)
-#         result = itertools.chain('{', lines, [count * replacer + '}'])
-#         return '\n'.join(result)
-#     return walk(tree, 0)
-
-
 def get_diff(old, new):
     diff = {}
     kept = old.keys() & new.keys()
@@ -83,7 +36,7 @@ def get_diff(old, new):
             }
 
     for d_key in deleted:
-        d_value = old1[d_key]
+        d_value = old[d_key]
         diff[d_key] = {
             STATE: DELETED,
             VALUE: d_value
@@ -98,42 +51,66 @@ def get_diff(old, new):
 
     return diff
 
-
-
-    # result = {}
-    # all_keys = dict1.keys() | dict2.keys()
-    # for key in all_keys:
-    #     if key not in dict1:
-    #         result[key] = "added"
-    #     elif key not in dict2:
-    #         result[key] = "deleted"
-    #     elif dict1[key] == dict2[key]:
-    #         result[key] = "unchanged"
-    #     elif dict1[key] != dict2[key]:
-    #         result[key] = "changed"
-    # return result
-
-
-old1 = {
-    "unchanged": "world",
-    "deleted": True,
-    "nested": {
-        "count": {
-            'next': 5
-        }
-    },
-    'changed': 'cat'
-    }
-
-
-new1 = {
-    "unchanged": "world",
-    "nested": {
-        "count": 5
-    },
-    'changed': 'dog',
-    'added': 'boom'
-}
-
-
-print(get_diff(old1, new1))
+# old1 = {
+#     "k_unchanged": "world",
+#     "k_deleted": True,
+#     "k_nested": {
+#         "k_count": {
+#             'k_next': 5
+#         }
+#     },
+#     'k_changed': 'cat'
+#     }
+#
+#
+# new1 = {
+#     "k_unchanged": "world",
+#     "k_nested": {
+#         "k_count": 5
+#     },
+#     'k_changed': 'dog',
+#     'k_added': 'boom',
+#     'k_added2': 'bom'
+# }
+#
+# old2 = {
+#   "host": "hexlet.io",
+#   "timeout": 50,
+#   "proxy": "123.234.53.22",
+#   "follow": False
+# }
+#
+# new2 = {
+#   "timeout": 20,
+#   "verbose": True,
+#   "host": "hexlet.io"
+# }
+#
+# print(get_diff(old1, new1))
+#
+# print(get_diff(old2, new2))
+#
+#
+# plain = {
+#     'host': {
+#         'state': 'unchanged',
+#         'value': 'hexlet.io'
+#     },
+#     'timeout': {
+#         'state': 'changed',
+#         'old_value': 50,
+#         'new_value': 20
+#     },
+#     'proxy': {
+#         'state': 'deleted',
+#         'value': '123.234.53.22'
+#     },
+#     'follow': {
+#         'state': 'deleted',
+#         'value': False
+#     },
+#     'verbose': {
+#         'state': 'added',
+#         'value': True
+#     }
+# }

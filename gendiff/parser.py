@@ -19,5 +19,5 @@ def parse_data(data, data_format):
         return json.load(data)
 
 
-def data_and_format(source, data=get_file, data_format=get_extension):
+def get_data_and_format(source, data=get_file, data_format=get_extension):
     return data(source), data_format(get_extension(source))

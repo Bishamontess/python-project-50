@@ -1,4 +1,4 @@
 
 
-def output_plain(diff):
+def plain_output(diff):
     pass

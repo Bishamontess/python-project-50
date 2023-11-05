@@ -1,4 +1,4 @@
 
 
-def output_json(diff):
+def json_output(diff):
     pass

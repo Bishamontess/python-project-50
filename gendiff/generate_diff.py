@@ -2,8 +2,7 @@ from gendiff.differ import get_diff
 from gendiff.parser import parse_data
 from gendiff.formatter.formatter import format_output
 from gendiff.parser import get_data_and_format
-
-DEFAULT_FORMAT = 'stylish'
+from gendiff.formatter.formatter import DEFAULT_FORMAT
 
 
 def generate_diff(first_path, second_path, style=DEFAULT_FORMAT):

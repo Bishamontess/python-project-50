@@ -58,8 +58,6 @@ def format_inner(diff, space_count=2):
             ))
         result = itertools.chain('{', lines, [depth * replacer + '}'])
         return '\n'.join(result)
-        # stylish_diff = '\n'.join(result)
-        # return stylish_diff + '\n'
     return _walk(diff, space_count)
 
 
@@ -92,6 +90,4 @@ def stylish_output(diff, space_count=2):
         result = itertools.chain('{', lines, [(depth - inner_step) * replacer +
                                               '}'])
         return '\n'.join(result)
-        # stylish_result = '\n'.join(result)
-        # return stylish_result + '\n'
     return _walk(diff, space_count)

@@ -11,6 +11,10 @@ check:
 
 test-coverage:
 	poetry run pytest --cov
+	
+pytest:
+	poetry run pytest --cov
+
 
 
 .PHONY: install test lint check build publish

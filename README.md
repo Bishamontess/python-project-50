@@ -3,4 +3,4 @@
 
 **Demo:**
 
-[![asciicast](https://asciinema.org/a/581631.svg)](https://asciinema.org/a/619661)
+[![asciicast](https://asciinema.org/a/619670.svg)](https://asciinema.org/a/619670)

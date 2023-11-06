@@ -1,4 +1,5 @@
+import json
 
 
 def json_output(diff):
-    pass
+    return json.dumps(diff, sort_keys=True)

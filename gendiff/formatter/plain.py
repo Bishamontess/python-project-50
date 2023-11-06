@@ -63,33 +63,3 @@ def plain_output(diff, path=None):
         lines.append(line)
 
     return '\n'.join(line for line in lines if line)
-# dif = {
-#     'common': {
-#         'state': 'nested',
-#         'value': {'setting6': {'state': 'nested', 'value': {
-#             'key': {'state': 'unchanged', 'value': 'value'},
-#             'doge': {'state': 'nested', 'value': {
-#                 'wow': {'state': 'changed', 'old_value': '',
-#                         'new_value': 'so much'}}},
-#             'ops': {'state': 'added', 'value': 'vops'}}},
-#                   'setting3': {'state': 'changed', 'old_value': True,
-#                                'new_value': 'null'},
-#                   'setting1': {'state': 'unchanged', 'value': 'Value 1'},
-#                   'setting2': {'state': 'deleted', 'value': 200},
-#                   'setting5': {'state': 'added', 'value': {'key5': 'value5'}},
-#                   'setting4': {'state': 'added', 'value': 'blah blah'},
-#                   'follow': {'state': 'added', 'value': False}}},
-#     'group1': {'state': 'nested', 'value': {
-#         'nest': {'state': 'changed', 'old_value': {'key': 'value'},
-#                  'new_value': 'str'},
-#         'foo': {'state': 'unchanged', 'value': 'bar'},
-#         'baz': {'state': 'changed', 'old_value': 'bas', 'new_value':
-#         'bars'}}},
-#     # 'group2': {'state': 'deleted', 'value': {'abc': 12345, 'deep': {
-#     'id': 45}}},
-#     # 'group3': {'state': 'added',
-#     #            'value': {'deep': {'id': {'number': 45}}, 'fee': 100500}}
-# }
-#
-#
-# print(plain_output(dif))

@@ -4,10 +4,9 @@ gendiff:
 install:
 	poetry build
 	python3 -m pip install --force-reinstall --user dist/*.whl
-
-check:
+selfcheck:
 	poetry check
-	poetry run flake8 gendiff
+check: selfcheck test lint
 test:
 	poetry run pytest
 lint:
@@ -18,4 +17,4 @@ coverage:
 update:
 	poetry update
 	
-.PHONY: install test lint check build publish update coverage
+.PHONY: install test lint check build publish update coverage selfcheck

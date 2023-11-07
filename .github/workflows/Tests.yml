@@ -34,5 +34,5 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: 098cb15e3332e94adb7731f4e20d7b04a60c0d6d47b45d39f5c7e069c2890002
       with:
-        coverageCommand: npm run coverage
+        coverageCommand: coverage run tests/test_generate_diff.py
         debug: true

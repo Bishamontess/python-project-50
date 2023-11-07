@@ -76,7 +76,6 @@ def stylish_output(diff, space_count=2):
 
             if state == NESTED:
                 value = stylish_output(value, depth + step)
-
             if state == CHANGED:
                 old_value = format_inner(data[OLD_VALUE], depth + inner_step)
                 lines.append(make_line(key, old_value, DELETED, depth))

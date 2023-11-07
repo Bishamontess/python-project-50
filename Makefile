@@ -1,6 +1,6 @@
 gendiff:
 		poetry run python -m gendiff.scripts.gendiff -h
-	
+
 install:
 		poetry install
 #	poetry build
@@ -22,5 +22,5 @@ coverage:
 
 update:
 		poetry update
-	
-.PHONY: install test lint check build publish update coverage selfcheck
+
+.PHONY: install test lint check build update coverage selfcheck

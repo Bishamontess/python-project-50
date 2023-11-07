@@ -35,6 +35,7 @@ def make_line(path, state, old=None, new=None, value=None):
                 f" {new}")
     else:
         line = ''
+
     return line
 
 

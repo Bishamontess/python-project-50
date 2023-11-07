@@ -11,7 +11,7 @@ def to_str(value):
         return f"'{value}'"
     if isinstance(value, dict):
         return '[complex value]'
-    return f"'{value}'"
+    return '{0}'.format(value)
 
 
 def make_line(path, state, old=None, new=None, value=None):

@@ -7,9 +7,9 @@ install:
 
 check:
 	poetry check
-	poetry run pytest
 	poetry run flake8 gendiff
-
+test:
+	poetry run pytest
 lint:
 	poetry run flake8 gendiff
 coverage:

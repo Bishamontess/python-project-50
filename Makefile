@@ -2,11 +2,13 @@ gendiff:
 	poetry run python -m gendiff.scripts.gendiff -h
 	
 install:
-	poetry build
-	python3 -m pip install --force-reinstall --user dist/*.whl
+	poetry install
+#	poetry build
+#	python3 -m pip install --force-reinstall --user dist/*.whl
 selfcheck:
 	poetry check
-check: selfcheck test lint
+check:
+	selfcheck test lint
 test:
 	poetry run pytest
 lint:

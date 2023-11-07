@@ -15,11 +15,9 @@ jobs:
       run: |
         pip install poetry
         make install
-        make update
     - name: Run linter and pytest
       run: |
-        poetry run flake8 gendiff
-        poetry run pytest tests
+        make check
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v5.0.0
       if: github.ref_name == 'main'

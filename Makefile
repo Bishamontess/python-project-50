@@ -6,8 +6,9 @@ install:
 	python3 -m pip install --force-reinstall --user dist/*.whl
 
 check:
-	poetry run flake8 gendiff
+	poetry check
 	poetry run pytest
+	poetry run flake8 gendiff
 
 lint:
 	poetry run flake8 gendiff

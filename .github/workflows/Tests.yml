@@ -8,26 +8,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-#
-#    - name: configure
-#      run: ./pyproject.toml
-
+    - uses: actions/checkout@v4
     - name: Install dependencies
       run: |
         pip install poetry
         make install
         make update
-
     - name: Run linter and pytest
       run: |
         make check
-      continue-on-error: true
-
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v5.0.0
       if: github.ref_name == 'main'
@@ -36,11 +27,3 @@ jobs:
       with:
         coverageCommand: make coverage
         debug: true
-#    - name: Test & publish code coverage
-#      uses: paambaati/codeclimate-action@v5.0.0
-##      if: github.ref_name == 'main'
-#      env:
-#        CC_TEST_REPORTER_ID: 098cb15e3332e94adb7731f4e20d7b04a60c0d6d47b45d39f5c7e069c2890002
-#      with:
-#        coverageCommand: coverage run tests/test_generate_diff.py
-#        debug: true

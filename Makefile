@@ -10,7 +10,7 @@ check:
 	poetry run pytest
 
 coverage:
-	poetry run pytest --cov
+	poetry run pytest --cov=gendiff --cov-report xml
 
 
 .PHONY: install test lint check build publish

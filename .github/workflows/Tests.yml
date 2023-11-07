@@ -19,7 +19,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install poetry
         make install
 
@@ -30,9 +29,17 @@ jobs:
 
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v5.0.0
-#      if: github.ref_name == 'main'
+      if: github.ref_name == 'main'
       env:
-        CC_TEST_REPORTER_ID: 098cb15e3332e94adb7731f4e20d7b04a60c0d6d47b45d39f5c7e069c2890002
+        CC_TEST_REPORTER_ID: ${{ secrets.098cb15e3332e94adb7731f4e20d7b04a60c0d6d47b45d39f5c7e069c2890002 }}
       with:
-        coverageCommand: coverage run tests/test_generate_diff.py
+        coverageCommand: make test-coverage
         debug: true
+#    - name: Test & publish code coverage
+#      uses: paambaati/codeclimate-action@v5.0.0
+##      if: github.ref_name == 'main'
+#      env:
+#        CC_TEST_REPORTER_ID: 098cb15e3332e94adb7731f4e20d7b04a60c0d6d47b45d39f5c7e069c2890002
+#      with:
+#        coverageCommand: coverage run tests/test_generate_diff.py
+#        debug: true

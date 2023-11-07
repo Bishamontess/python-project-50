@@ -9,11 +9,12 @@ check:
 	poetry run flake8 gendiff
 	poetry run pytest
 
+lint:
+	poetry run flake8 gendiff
 coverage:
 	poetry run pytest --cov=gendiff --cov-report xml
 
 update:
 	poetry update
 	
-	
-.PHONY: install test lint check build publish update
+.PHONY: install test lint check build publish update coverage

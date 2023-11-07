@@ -46,10 +46,8 @@ def format_inner(diff, space_count=2):
     def _walk(node, depth):
         if not isinstance(node, dict):
             return to_str(node)
-
         lines = []
         replacer = ' '
-
         for key, value in node.items():
             lines.append(view(
                 ind=replacer * (depth + step),
@@ -58,6 +56,7 @@ def format_inner(diff, space_count=2):
             ))
         result = itertools.chain('{', lines, [depth * replacer + '}'])
         return '\n'.join(result)
+
     return _walk(diff, space_count)
 
 
@@ -82,8 +81,8 @@ def stylish_output(diff, space_count=2):
                 continue
             f_value = format_inner(value, depth + inner_step)
             lines.append(make_line(key, f_value, state, depth))
-
-        result = itertools.chain('{', lines, [(depth - inner_step) * replacer +
-                                              '}'])
+        result = itertools.chain('{', lines, [(depth - inner_step)
+                                              * replacer + '}'])
         return '\n'.join(result)
+
     return _walk(diff, space_count)

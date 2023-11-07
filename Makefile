@@ -9,12 +9,8 @@ check:
 	poetry run flake8 gendiff
 	poetry run pytest
 
-test-coverage:
+coverage:
 	poetry run pytest --cov
-	
-pytest:
-	poetry run pytest --cov
-
 
 
 .PHONY: install test lint check build publish

@@ -68,12 +68,10 @@ def stylish_output(diff, space_count=2):
 
     def _walk(node, depth):
         lines = []
-
         for key in sorted(node):
             data = node[key]
             state = data[STATE]
             value = data.get(VALUE)
-
             if state == NESTED:
                 value = stylish_output(value, depth + step)
             if state == CHANGED:
@@ -82,7 +80,6 @@ def stylish_output(diff, space_count=2):
                 new_value = format_inner(data[NEW_VALUE], depth + inner_step)
                 lines.append(make_line(key, new_value, ADDED, depth))
                 continue
-
             f_value = format_inner(value, depth + inner_step)
             lines.append(make_line(key, f_value, state, depth))
 

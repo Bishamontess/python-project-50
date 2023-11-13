@@ -1,59 +1,51 @@
 import json
-from gendiff.generate_diff import generate_diff
-from gendiff.formatter.formatter import PLAIN
+import os
+import pytest
+
 from gendiff.parser import parse_data, get_data_and_format
+from gendiff.generate_diff import generate_diff
 from gendiff.differ import get_diff
-from gendiff.formatter.formatter import JSON
 
 
-def test_generate_diff_yaml_plain():
-    file1 = 'tests/fixtures/plain/file1.yaml'
-    file2 = 'tests/fixtures/plain/file2.yml'
-    with open('tests/fixtures/plain/plain.txt', 'r') as f:
-        output_file = f.read().strip()
-    assert generate_diff(file1, file2) == output_file
+def get_fixture_path(file_name, directory):
+    current_dir = os.path.dirname(os.path.abspath(directory))
+    return os.path.join(current_dir, 'fixtures', directory, file_name)
 
 
-def test_generate_diff_json_plain():
-    file1 = 'tests/fixtures/plain/file1.json'
-    file2 = 'tests/fixtures/plain/file2.json'
-    with open('tests/fixtures/plain/plain.txt', 'r') as f:
-        output_file = f.read().strip()
-    assert generate_diff(file1, file2) == output_file
+@pytest.mark.parametrize(
+    'first_file, second_file, directory, style, output',
+    [
+        pytest.param('file1.json', 'file2.json', 'plain', 'stylish',
+                     'plain.txt', id='plain_files_default_out'
+                     ),
+        pytest.param('file1.json', 'file2.yml', 'nested', 'stylish',
+                     'stylish_diff.txt', id='nested_files_default_out'
+                     ),
+        pytest.param('file1.yaml', 'file2.json', 'nested', 'plain',
+                     'plain_diff.txt', id='nested_files_plain_out'
+                     ),
+    ],
+)
+def test_gendiff_text_output(first_file, second_file, directory, style, output):
+    file1_path = get_fixture_path(first_file, directory)
+    file2_path = get_fixture_path(second_file, directory)
+    with open(get_fixture_path(output, directory), 'r') as f:
+        expected = f.read().strip()
+    assert generate_diff(file1_path, file2_path, style) == expected
 
 
-def test_generate_diff_json_nested():
-    file1 = 'tests/fixtures/nested/file1.json'
-    file2 = 'tests/fixtures/nested/file2.json'
-    with open('tests/fixtures/nested/stylish_diff.txt', 'r') as f:
-        output_file = f.read().strip()
-    assert generate_diff(file1, file2) == output_file
-
-
-def test_generate_diff_yaml_nested():
-    file1 = 'tests/fixtures/nested/file1.yaml'
-    file2 = 'tests/fixtures/nested/file2.yml'
-    with open('tests/fixtures/nested/stylish_diff.txt', 'r') as f:
-        output_file = f.read().strip()
-    assert generate_diff(file1, file2) == output_file
-
-
-def test_generate_diff_plain_output():
-    file1 = 'tests/fixtures/nested/file1.yaml'
-    file2 = 'tests/fixtures/nested/file2.yml'
-    with open('tests/fixtures/nested/plain_diff.txt', 'r') as f:
-        output_file = f.read().strip()
-    assert generate_diff(file1, file2, PLAIN) == output_file
-
-
-def test_generate_diff_json_output():
-    file1 = 'tests/fixtures/nested/file1.yaml'
-    file2 = 'tests/fixtures/nested/file2.yml'
-    data1, extension1 = get_data_and_format(file1)
-    data2, extension2 = get_data_and_format(file2)
+@pytest.mark.parametrize(
+    'first_file, second_file, directory, style',
+    [('file1.json', 'file2.yml', 'nested', 'json')],
+)
+def test_gendiff_json_output(first_file, second_file, directory, style):
+    file1_path = get_fixture_path(first_file, directory)
+    file2_path = get_fixture_path(second_file, directory)
+    data1, extension1 = get_data_and_format(file1_path)
+    data2, extension2 = get_data_and_format(file2_path)
     diff = get_diff(
         parse_data(data1, extension1),
         parse_data(data2, extension2)
     )
-    json_diff = generate_diff(file1, file2, JSON)
+    json_diff = generate_diff(file1_path, file2_path, style)
     assert json.loads(json_diff) == diff

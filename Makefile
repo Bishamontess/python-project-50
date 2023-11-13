@@ -10,6 +10,7 @@ selfcheck:
 check: selfcheck test lint
 
 test:
+		cd tests/
 		poetry run pytest
 
 lint:
@@ -18,7 +19,12 @@ lint:
 coverage:
 		poetry run pytest --cov=gendiff --cov-report xml
 
-update:
-		poetry update
+build:
+		poetry build
 
-.PHONY: install test lint check build update coverage selfcheck
+package-install:
+	python3 -m pip install --force-reinstall --user dist/*.whl
+
+full-install: install build package-install
+
+.PHONY: install test lint check build update coverage selfcheck check

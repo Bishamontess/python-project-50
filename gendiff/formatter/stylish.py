@@ -1,15 +1,4 @@
 import itertools
-from gendiff.differ import (
-    ADDED,
-    CHANGED,
-    NESTED,
-    NEW_VALUE,
-    OLD_VALUE,
-    DELETED,
-    STATE,
-    UNCHANGED,
-    VALUE,
-)
 
 
 def to_str(value):
@@ -25,10 +14,10 @@ def to_str(value):
 def make_line(key, value, state, indent):
     view = '{ind}{sign} {key}: {value}'.format
     sign = {
-        DELETED: '-',
-        ADDED: '+',
-        UNCHANGED: ' ',
-        NESTED: ' ',
+        'deleted': '-',
+        'added': '+',
+        'unchanged': ' ',
+        'nested': ' ',
     }
     replacer = ' '
     return view(
@@ -69,15 +58,15 @@ def stylish_output(diff, space_count=2):
         lines = []
         for key in sorted(node):
             data = node[key]
-            state = data[STATE]
-            value = data.get(VALUE)
-            if state == NESTED:
+            state = data['state']
+            value = data.get('value')
+            if state == 'nested':
                 value = stylish_output(value, depth + step)
-            if state == CHANGED:
-                old_value = format_inner(data[OLD_VALUE], depth + inner_step)
-                lines.append(make_line(key, old_value, DELETED, depth))
-                new_value = format_inner(data[NEW_VALUE], depth + inner_step)
-                lines.append(make_line(key, new_value, ADDED, depth))
+            if state == 'changed':
+                old_value = format_inner(data['old_value'], depth + inner_step)
+                lines.append(make_line(key, old_value, 'deleted', depth))
+                new_value = format_inner(data['new_value'], depth + inner_step)
+                lines.append(make_line(key, new_value, 'added', depth))
                 continue
             f_value = format_inner(value, depth + inner_step)
             lines.append(make_line(key, f_value, state, depth))

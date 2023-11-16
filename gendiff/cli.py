@@ -1,5 +1,4 @@
 import argparse
-from gendiff.generate_diff import DEFAULT_FORMAT
 
 
 def get_args():
@@ -16,7 +15,7 @@ def get_args():
         '--format',
         help="set format of output",
         metavar="FORMAT",
-        default=DEFAULT_FORMAT,
+        default='stylish',
     )
     args = parser.parse_args()
     return args.first_file, args.second_file, args.format

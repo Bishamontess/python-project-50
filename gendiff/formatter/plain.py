@@ -1,7 +1,3 @@
-from gendiff.differ import (ADDED, CHANGED, NESTED, OLD_VALUE, NEW_VALUE,
-                            STATE, VALUE, DELETED)
-
-
 def to_str(value):
     if isinstance(value, bool):
         return str(value).lower()
@@ -19,18 +15,18 @@ def make_line(path, state, old=None, new=None, value=None):
     path = '.'.join(path)
 
     options = {
-        DELETED: 'was removed',
-        CHANGED: 'was updated.',
-        ADDED: 'was added with value:',
+        'deleted': 'was removed',
+        'changed': 'was updated.',
+        'added': 'was added with value:',
     }
 
-    if state == DELETED:
+    if state == 'deleted':
         line = f"{first_word} '{path}' {options[state]}"
 
-    elif state == ADDED:
+    elif state == 'added':
         line = f"{first_word} '{path}' {options[state]} {value}"
 
-    elif state == CHANGED:
+    elif state == 'changed':
         line = (f"{first_word} '{path}' {options[state]} From {old} to"
                 f" {new}")
     else:
@@ -46,18 +42,18 @@ def plain_output(diff, path=None):
     for key in sorted(diff):
         path.append(key)
         data = diff[key]
-        state = data[STATE]
+        state = data['state']
 
-        if state == NESTED:
-            lines.append(plain_output(data[VALUE], path))
+        if state == 'nested':
+            lines.append(plain_output(data['value'], path))
 
-        if state == CHANGED:
-            old_val = to_str(data[OLD_VALUE])
-            new_val = to_str(data[NEW_VALUE])
+        if state == 'changed':
+            old_val = to_str(data['old_value'])
+            new_val = to_str(data['new_value'])
             line = make_line(path, state, old_val, new_val)
 
         else:
-            value = to_str(data[VALUE])
+            value = to_str(data['value'])
             line = make_line(path, state, value=value)
 
         path.pop()

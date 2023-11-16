@@ -17,8 +17,9 @@ def get_extension(file_path):
     file_extension = file_name.split('.')[-1]
     if file_extension not in SUPPORTED_FORMATS:
         message = (
-            'File {n} has wrong format: {f}. Supported formats: {s}'.format)
-        supported = ','.join(SUPPORTED_FORMATS)
+            'File "{n}" has wrong format: "{f}". Supported formats: {'
+            's}'.format)
+        supported = ', '.join(SUPPORTED_FORMATS)
         raise TypeError(message(
             n=file_name,
             f=file_extension,

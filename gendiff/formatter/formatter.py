@@ -3,15 +3,10 @@ from gendiff.formatter.plain import plain_output
 from gendiff.formatter.json import json_output
 
 
-DEFAULT_FORMAT = 'stylish'
-PLAIN = 'plain'
-JSON = 'json'
-
-
 def format_output(diff, style):
-    if style == DEFAULT_FORMAT:
+    if style == 'stylish':
         return stylish_output(diff)
-    if style == PLAIN:
+    elif style == 'plain':
         return plain_output(diff)
-    if style == JSON:
+    elif style == 'json':
         return json_output(diff)

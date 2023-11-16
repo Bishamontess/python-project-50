@@ -8,8 +8,7 @@ from gendiff.differ import get_diff
 
 
 def get_fixture_path(file_name, directory):
-    current_dir = os.path.dirname(os.path.abspath(directory))
-    return os.path.join(current_dir, 'fixtures', directory, file_name)
+    return os.path.join('tests', 'fixtures', directory, file_name)
 
 
 @pytest.mark.parametrize(
